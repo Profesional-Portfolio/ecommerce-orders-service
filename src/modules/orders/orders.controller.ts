@@ -11,7 +11,7 @@ import { PaidOrderDto } from './dto';
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
-  @MessagePattern({ cmd: 'create_order' })
+  @MessagePattern({ cmd: 'create.order' })
   async create(@Payload() createOrderDto: CreateOrderDto) {
     const order = await this.ordersService.create(createOrderDto);
 
@@ -23,17 +23,17 @@ export class OrdersController {
     };
   }
 
-  @MessagePattern({ cmd: 'find_all_orders' })
+  @MessagePattern({ cmd: 'find.all.orders' })
   findAll(@Payload() ordersPaginatinDto: OrdersPaginatinDto) {
     return this.ordersService.findAll(ordersPaginatinDto);
   }
 
-  @MessagePattern({ cmd: 'find_one_order' })
+  @MessagePattern({ cmd: 'find.one.order' })
   findOne(@Payload('id', UuidValidationPipe) id: string) {
     return this.ordersService.findOne(id);
   }
 
-  @MessagePattern({ cmd: 'update_order_status' })
+  @MessagePattern({ cmd: 'update.order.status' })
   updateStatus(@Payload() updateStatusDto: UpdateStatusDto) {
     return this.ordersService.updateStatus(updateStatusDto);
   }
